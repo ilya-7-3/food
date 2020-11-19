@@ -178,12 +178,9 @@ function postData(form){
     });
 }
 
-function showThanksModal (message) {
-    
-    
-}
-
-
+ fetch('db.json')
+ .then(data=>data.json())
+ .then(res=>console.log(res))
 
 
 
