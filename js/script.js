@@ -64,9 +64,7 @@ let btnOpen = document.querySelectorAll('[data-open]'),
     let timeId = setTimeout(open,5000);
     
     function showModalByScroll(){
-        console.log(window.pageYOffset);
-            console.log(document.documentElement.clientHeight);
-            console.log(document.documentElement.scrollHeight);
+       
             
         if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight - 1){
             open();
@@ -178,10 +176,48 @@ function postData(form){
     });
 }
 
- fetch('db.json')
+ /* fetch('db.json')
  .then(data=>data.json())
  .then(res=>console.log(res))
+ */
 
 
+let offerSliderWr = document.querySelector('.offer__slider-wrapper'),
+slider = document.querySelectorAll('.offer__slide'),
+current = document.querySelector('#current'),
+total = document.querySelector('#total'),
+next = document.querySelector('.offer__slider-next'),
+back = document.querySelector('.offer__slider-prev'),
+fl=0;
 
+total.innerHTML=slider.length;
+function openSlider(i=0){
+        slider[i].style.display='block';
+        current.innerHTML=i+1;
+}
+function closeSlider(){
+    slider.forEach(function(item,i){
+        item.style.display='none';
+    });
+}
+closeSlider();
+openSlider(fl);
 
+next.addEventListener('click',function(){
+    
+    if(fl==slider.length-1){
+        fl=-1;
+    }
+    fl++;
+    closeSlider();
+    openSlider(fl);
+    
+});
+back.addEventListener('click',function(){
+    if(fl==0){
+        fl=slider.length;     
+    }
+    fl--;
+    closeSlider();
+    openSlider(fl);
+});
